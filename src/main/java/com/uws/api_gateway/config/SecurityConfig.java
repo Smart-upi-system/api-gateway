@@ -18,10 +18,8 @@ public class SecurityConfig {
                 .authorizeExchange(exchange ->exchange
                         .pathMatchers("/api/auth/**").permitAll()
                         .pathMatchers("/actuator/**").permitAll()
-
-                        .anyExchange().authenticated()
+                        .anyExchange().permitAll()
                 )
-
                 .build();
 
     }

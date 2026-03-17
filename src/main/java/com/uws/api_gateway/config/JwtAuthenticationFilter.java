@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -20,7 +22,7 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter  implements GatewayFilter {
+public class JwtAuthenticationFilter  implements GlobalFilter, Ordered {
 
     private final JwtUtil jwtUtil;
 
@@ -71,6 +73,11 @@ public class JwtAuthenticationFilter  implements GatewayFilter {
             return exchange.getResponse().setComplete();
         }
 
+    }
+
+    @Override
+    public int getOrder() {
+        return -1;  // ← run before other filters
     }
 
     private boolean isPublicPath(String path) {
