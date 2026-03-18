@@ -27,8 +27,8 @@ public class JwtAuthenticationFilter  implements GlobalFilter, Ordered {
     private final JwtUtil jwtUtil;
 
     private static final List<String> PUBLIC_PATHS=List.of(
-        "/api/auth/register",
-        "/api/auth/login",
+        "/auth/register",
+        "/auth/login",
         "/actuator"
     );
 
