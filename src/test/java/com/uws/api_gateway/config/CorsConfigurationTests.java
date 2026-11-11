@@ -34,7 +34,7 @@ class CorsConfigurationTests {
     }
 
     private MockServerWebExchange preflight(String origin) {
-        return MockServerWebExchange.from(MockServerHttpRequest.options("/users/profile")
+        return MockServerWebExchange.from(MockServerHttpRequest.options("http://localhost:8080/users/profile")
                 .header(HttpHeaders.ORIGIN, origin)
                 .header(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD, "GET")
                 .header(HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS, "authorization,x-user-id"));
